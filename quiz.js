@@ -34,10 +34,10 @@ fetch("./questions.json").then(function(resp) { //ucitavanje iz .json fajla
             obj.push(JSON.parse(randomStringArr[qi]));
         }
     })
-//onclick - izvršava se kada se klikne mišem na elemenat
-//Objekat document predstavlja celu HTML stranicu. Preko ovog objekta možemo menjati izgled i sadržaj stranice.
-//.getElementById("oznaka") - preko ovog metoda pristupamo elementu sa ID parametrom "oznaka".
-//.innerHTML - tekstualni sadržaj elementa
+    //onclick - izvršava se kada se klikne mišem na elemenat
+    //Objekat document predstavlja celu HTML stranicu. Preko ovog objekta možemo menjati izgled i sadržaj stranice.
+    //.getElementById("oznaka") - preko ovog metoda pristupamo elementu sa ID parametrom "oznaka".
+    //.innerHTML - tekstualni sadržaj elementa
 
 $(document).ready(function() {
     $("#next").click(function() {
@@ -229,7 +229,7 @@ function onClickOfferedButton(id, qn) {
 function loadNextAfterInterval(current, period) {
     var nextNum = current + 1;
     if (period == 0) {
-        loadNextNowAndAfterTwentySec("#quest" + current.toString(), "#quest" + nextNum.toString(), nextNum);
+        loadNextNowAndAfterSixtySec("#quest" + current.toString(), "#quest" + nextNum.toString(), nextNum);
     } else if (period == 1) {
         var seconds = period;
         var interval = setInterval(afterPeriod, 1500);
@@ -238,32 +238,32 @@ function loadNextAfterInterval(current, period) {
             seconds--;
             if (seconds == 0) {
                 clearInterval(interval);
-                loadNextNowAndAfterTwentySec("#quest" + current.toString(), "#quest" + nextNum.toString(), nextNum);
+                loadNextNowAndAfterSixtySec("#quest" + current.toString(), "#quest" + nextNum.toString(), nextNum);
             }
         }
     }
 }
 //tajmer
-function loadNextNowAndAfterTwentySec(quest_num_current, quest_num_next, n_next) {
+function loadNextNowAndAfterSixtySec(quest_num_current, quest_num_next, n_next) {
     if (n_next <= 10) {
         loadNext(quest_num_current, quest_num_next, n_next);
         var nextAfterNext = n_next + 1;
-        var scnd = 29;
+        var scnd = 59;
         var timerForNext = setInterval(afterInterval, 1000);
-        document.getElementById("time").innerHTML = "ТАЈМЕР: 30";
+        document.getElementById("time").innerHTML = "ТАЈМЕР: 60";
 
         function afterInterval() {
             document.getElementById("time").innerHTML = "ТАЈМЕР: " + scnd;
             if (clickedButton == true) {
-                document.getElementById("time").innerHTML = "ТАЈМЕР: 30";
+                document.getElementById("time").innerHTML = "ТАЈМЕР: 60";
                 clearInterval(timerForNext);
                 clickedButton = false;
-                scnd = 29;
+                scnd = 59;
             }
             scnd--;
             if (scnd == -2) {
                 clearInterval(timerForNext);
-                loadNextNowAndAfterTwentySec(quest_num_next, "#quest" + nextAfterNext.toString(), nextAfterNext)
+                loadNextNowAndAfterSixtySec(quest_num_next, "#quest" + nextAfterNext.toString(), nextAfterNext)
             }
         }
     } else {
